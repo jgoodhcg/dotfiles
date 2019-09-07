@@ -319,6 +319,7 @@ you should place your code here."
   (setq org-todo-keyword-faces
         '(("DOSUB" . "yellow")
           ("CANCELED" . (:foreground "grey" :weight bold))))
+  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3") ;; fixes https for elpa?
   (defun gsd-files ()
     "Generate a list of all gsd org files for reporting."
     (file-expand-wildcards "/home/justin/next-cloud/gsd/gsd.org*")))
