@@ -133,7 +133,7 @@ values."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Variable"
-                               :size 48
+                               :size 36
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -303,7 +303,7 @@ you should place your code here."
   (require 'helm-bookmark)
   ;; (require 'org-trello)
   (add-to-list 'auto-mode-alist '("\\.edn$" . clojure-mode))
-  (add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
+  ;; (add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
   ;; (with-eval-after-load 'org
   ;;   (require 'org-projectile)
   ;;   (setq org-directory '("/media/justin/data/Documents"))
@@ -313,12 +313,17 @@ you should place your code here."
   ;;   (setq org-bullets-bullet-list '("*" "**" "***" "****"))
   ;;   )
   (setq helm-split-window-inside-p t)
+  (setq org-duration-format (quote h:mm))
+  (setq org-html-validation-link nil) ;; for html export
   (setq org-refile-targets
         '(("gsd.org" :maxlevel . 1)
           ("someday.org" :maxlevel . 1)))
   (setq org-todo-keyword-faces
         '(("DOSUB" . "yellow")
           ("CANCELED" . (:foreground "grey" :weight bold))))
+  (setq org-enforce-todo-dependencies t)
+  (setq org-enforce-todo-checkbox-dependencies nil)
+  (setq org-agenda-dim-blocked-tasks 'dim)
   (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3") ;; fixes https for elpa?
   (defun gsd-files ()
     "Generate a list of all gsd org files for reporting."
@@ -335,7 +340,7 @@ you should place your code here."
  '(org-tags-column -80)
  '(package-selected-packages
    (quote
-    (xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help discover-clj-refactor sesman org-trello org-mime simple-httpd json-snatcher json-reformat parent-mode flx anzu goto-chg f diminish edn paredit peg eval-sexp-fu spinner pkg-info epl bind-map bind-key popup helm-company helm-c-yasnippet fuzzy company-web web-completion-data company-tern dash-functional company-statistics clojure-snippets auto-yasnippet ac-ispell auto-complete flyspell-correct-helm flyspell-correct auto-dictionary org-brain company ox-gfm vmd-mode org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-download htmlize gnuplot floobits seq powerline markdown-mode inflections multiple-cursors cider queue clojure-mode packed avy highlight iedit smartparens evil undo-tree projectile helm helm-core async skewer-mode js2-mode hydra yasnippet haml-mode dash s helm-gtags ggtags rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest chruby bundler inf-ruby geben phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode yaml-mode ws-butler winum which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tern tagedit sql-indent spaceline slim-mode scss-mode sass-mode restart-emacs request rainbow-delimiters pug-mode popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file nginx-mode neotree move-text mmm-mode markdown-toc macrostep lorem-ipsum livid-mode linum-relative link-hint less-css-mode json-mode js2-refactor js-doc info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-css-scss helm-ag google-translate golden-ratio gh-md flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu emmet-mode elisp-slime-nav dumb-jump define-word csv-mode column-enforce-mode coffee-mode clj-refactor clean-aindent-mode cider-eval-sexp-fu auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line)))
+    (parseedn parseclj a lv xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help discover-clj-refactor sesman org-trello org-mime simple-httpd json-snatcher json-reformat parent-mode flx anzu goto-chg f diminish edn paredit peg eval-sexp-fu spinner pkg-info epl bind-map bind-key popup helm-company helm-c-yasnippet fuzzy company-web web-completion-data company-tern dash-functional company-statistics clojure-snippets auto-yasnippet ac-ispell auto-complete flyspell-correct-helm flyspell-correct auto-dictionary org-brain company ox-gfm vmd-mode org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-download htmlize gnuplot floobits seq powerline markdown-mode inflections multiple-cursors cider queue clojure-mode packed avy highlight iedit smartparens evil undo-tree projectile helm helm-core async skewer-mode js2-mode hydra yasnippet haml-mode dash s helm-gtags ggtags rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest chruby bundler inf-ruby geben phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode yaml-mode ws-butler winum which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tern tagedit sql-indent spaceline slim-mode scss-mode sass-mode restart-emacs request rainbow-delimiters pug-mode popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file nginx-mode neotree move-text mmm-mode markdown-toc macrostep lorem-ipsum livid-mode linum-relative link-hint less-css-mode json-mode js2-refactor js-doc info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-css-scss helm-ag google-translate golden-ratio gh-md flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu emmet-mode elisp-slime-nav dumb-jump define-word csv-mode column-enforce-mode coffee-mode clj-refactor clean-aindent-mode cider-eval-sexp-fu auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line)))
  '(standard-indent 2))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
